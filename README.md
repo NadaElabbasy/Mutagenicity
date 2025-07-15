@@ -18,9 +18,7 @@ The aim is to computationally flag potentially **mutagenic (and carcinogenic)** 
   - [SDF Dataset](#sdf-dataset)
 - [Models and Evaluation](#models-and-evaluation)
 - [Usage](#usage)
-- [Visualization](#Visualization)
-- [Model Saving & Loading](#model-saving--loading)
-- [Installation](#installation)
+- [Visualization](#visualization)
 - [Requirements](#requirements)
 - [References](#references)
 - [License](#license)
@@ -38,10 +36,12 @@ The aim is to computationally flag potentially **mutagenic (and carcinogenic)** 
 
 ### SMILES Dataset
 
-- **Source:** Combined from references [1], [13], [14]
+- **Source:** Combined from references [1] , [2], [3]
 - **Samples after cleaning:** 11,678  
   - 6,556 mutagenic, 5,122 non-mutagenic
-- **Fingerprinting:** Morgan fingerprints (radius=2, nBits=1024)
+- **Feature Engineering:**
+  - Morgan Fingerprint (Radius=2, nBits=1024)
+  - Converted to integer lists and standardized using `StandardScaler`
 - **Splits:**
   | Set        | Count |
   |------------|-------|
@@ -49,12 +49,17 @@ The aim is to computationally flag potentially **mutagenic (and carcinogenic)** 
   | Validation | 1,170 |
   | Testing    | 1,170 |
 
+- **Maximum SMILES Length:** 489  
+- **Max Number of Unique Characters:** 155
+
 ### SDF Dataset
 
-- **Source:** Merged from [1], [11], [12]
+- **Source:** Merged from [1], [4], [5]
 - **Samples:** 11,696  
   - 6,556 mutagenic, 5,140 non-mutagenic
-- **Fingerprinting:** Morgan fingerprints (radius=3, nBits=2048)
+- **Feature Engineering:**
+  - Morgan Fingerprint (Radius=3, nBits=2048)
+  - Converted to NumPy arrays and standardized using `StandardScaler`
 - **Splits:**
   | Set        | Count |
   |------------|-------|
@@ -68,7 +73,7 @@ The aim is to computationally flag potentially **mutagenic (and carcinogenic)** 
 
 Both models test a range of algorithms. The best-performing model in both formats is:
 
-## Model Comparison
+### Model Comparison
 
 ### 1. SMILES-Based Models
 
@@ -83,10 +88,10 @@ Both models test a range of algorithms. The best-performing model in both format
 
 ✅ **Proposed Model:** Random Forest  
 ✅ **Best Result:** 
-`
+
 - Accuracy: **0.946**
 - Precision: 0.941
-- Recall: 0.951`
+- Recall: 0.951
 
 ### 2. SDF-Based Models
 
@@ -101,11 +106,11 @@ Both models test a range of algorithms. The best-performing model in both format
 
 ✅ **Proposed Model:** Random Forest  
 ✅ **Best Result:** 
-`
+
 - Accuracy: **0.931**
 - Precision: 0.931
 - Recall: 0.943
-`
+
 
 ---
 
@@ -137,6 +142,19 @@ jupyter notebook MutagenecitySDF_final.ipynb
 
 ## Visualization
 
+### 1. SMILES Model 
+
+![SMILES Confusion Matrix](images/confusion_matrix_smiles.png)
+![Model Accuracy](images/Model_accuracy_smiles.png)
+![Model Loss](images/Model_loss_smiles.png)
+
+### 2. SDF Model
+
+![SDF Confusion Matrix](images/confusion_matrix_sdf.png)
+![Model Accuracy](images/Model_accuracy_sdf.png)
+![Model Loss](images/Model_loss_sdf.png)
+
+
 ---
 
 ## Requirements
@@ -158,6 +176,16 @@ jupyter notebook MutagenecitySDF_final.ipynb
 - joblib
 
 - Jupyter Notebook
+
+--- 
+
+## References
+
+- [1] https://github.com/kareemjeiroudi/molecules_and_ml/tree/master/data
+- [2] https://github.com/datagrok-ai/admetica/blob/main/Datasets/Toxicity/Ames.csv
+- [3] https://github.com/JenniferHemmerich/JUBioactivities/blob/master/JUBioactivities/toxicity/helma/README
+- [4] https://github.com/JenniferHemmerich/JUBioactivities/blob/master/JUBioactivities/toxicity/Hansen_Ames/Info.txt
+- [5] https://iwatobipen.wordpress.com/2015/09/27/qsar-with-chainer/
 
 --- 
 
